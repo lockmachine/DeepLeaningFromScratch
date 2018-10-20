@@ -1,0 +1,2 @@
+# DeepLeaningFromScratch
+ゼロから作るDeepLeaningの写経
