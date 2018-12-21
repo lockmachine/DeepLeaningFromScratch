@@ -13,7 +13,3 @@ class Man:
 m = Man("David")
 m.hello()
 m.goodbye()
-
-n = Man("Sam")
-n.hello()
-n.goodbye()
