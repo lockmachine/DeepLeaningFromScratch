@@ -32,3 +32,4 @@ img = imread("../dataset/lena.png")	# 画像の読み込み（適切なパスを
 plt.imshow(img)
 
 plt.show()
+# 写経終了
