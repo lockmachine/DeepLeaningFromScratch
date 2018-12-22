@@ -40,3 +40,6 @@ B = np.array([[3, 0],[0, 6]])
 print(B)
 print(A + B)
 print(A * B)
+
+print(A)
+print(A * 10)
