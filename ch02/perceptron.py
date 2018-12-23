@@ -61,9 +61,9 @@ def OR(x1, x2):
 
 print("\n# 2.5.2 XORゲートの実装")
 def XOR(x1, x2):
-	y_nand = NAND(x1, x2)
-	y_or = OR(x1, x2)
-	y = AND(y_nand, y_or)
+	y_nand = NAND(x1, x2)	# 第1層の出力
+	y_or = OR(x1, x2)		# 第2層の出力
+	y = AND(y_nand, y_or)	# 出力層の出力
 	return y
 
 print(XOR(0, 0))	# 0 を
