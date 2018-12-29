@@ -40,7 +40,7 @@ x = np.arange(-5.0, 5.0, 0.1)
 y = step_function_very_short(x)
 plt.plot(x, y)
 plt.ylim(-0.1, 1.1)
-plt.show()
+#plt.show()
 
 print("\n#3.2.4 シグモイド関数の実装")
 def sigmoid(x):
