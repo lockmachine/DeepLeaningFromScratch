@@ -10,7 +10,8 @@ exp(10) は 20,000 を超えて、exp(100) は 0 が 40 個以上も並ぶ大き
 exp(1000) の結果は無限大を表す inf が返ってくる
 '''
 def softmax(a):
-    exp_a = np.exp(a)
+    c = np.max(a)
+    exp_a = np.exp(a - c)   # オーバーフロー対策
     sum_exp_a = np.sum(exp_a)
     y = exp_a / sum_exp_a
     return y
@@ -26,3 +27,8 @@ if __name__ == '__main__':
 
     y = exp_a / sum_exp_a
     print(y)
+
+    a = np.array([1010, 1000, 990])
+    print(np.exp(a) / np.sum(np.exp(a)))    # ソフトマックスの計算（正しく計算されない）
+
+    print(softmax(a))
