@@ -6,11 +6,17 @@ def mean_squared_error(y, t):
 
 def cross_entropy_error(y, t):
 	if y.ndim == 1:	# y の次元が1次元なら
-		t = t.reshape(1, t.size)
-		y = y.reshape(1, y.size)
+		t = t.reshape(1, t.size)	# 1xsize 次元に reshape する
+		y = y.reshape(1, y.size)	# -> reshape 前は (t.size, ) だが、reshape することによって (1, t.size) 形状となる
 
+	# y の次元が2次元以上だったら、reshapeは必要ない
 	batch_size = y.shape[0]
-	e = -np.sum(t * np.log(y[np.arange(batch_size), t] + 1e-7)) / batch_size
+
+	# 正解データが one-hot-vector で与えられた場合
+#	e = -np.sum(t * np.log(y + 1e-7)) / batch_size
+
+	# 正解データがラベル形式で与えられた場合
+	e = -np.sum(np.log(y[np.arange(batch_size), t] + 1e-7)) / batch_size
 	return e
 
 if __name__ == "__main__":
