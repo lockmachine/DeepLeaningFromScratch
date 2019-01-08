@@ -1,11 +1,11 @@
 import sys, os
-sys.path.append(os.pardir)
+sys.path.append(os.pardir)	# 親ディレクトリのファイルをインポートするための設定
 import numpy as np
 from dataset.mnist import load_mnist
 from PIL import Image
 
 def img_show(img):
-    pil_img = Image.fromarray(np.uint8(img))
+    pil_img = Image.fromarray(np.uint8(img))	# PIL 用のデータオブジェクトへの変換
     pil_img.show()
 
 (x_train, t_train), (x_test, t_test) = \
@@ -17,6 +17,6 @@ print(label)    # 5
 
 print(img.shape)        # (784, )
 img = img.reshape(28, 28)
-print(img.shape)
+print(img.shape)		# (28, 28)
 
 img_show(img)

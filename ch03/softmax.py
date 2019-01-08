@@ -11,7 +11,7 @@ exp(1000) の結果は無限大を表す inf が返ってくる
 '''
 def softmax(a):
     c = np.max(a)
-    exp_a = np.exp(a - c)   # オーバーフロー対策
+    exp_a = np.exp(a - c)   # オーバーフロー対策->データの最大値を減算することで、データの中心化を行う
     sum_exp_a = np.sum(exp_a)
     y = exp_a / sum_exp_a
     return y
