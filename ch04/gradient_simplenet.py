@@ -24,9 +24,11 @@ class simpleNet:
 		loss = cross_entropy_error(y, t)
 		return loss
 
+"""
 def f(W):
 	return net.loss(x, t)
-
+"""
+f = lambda W: net.loss(x, t)
 
 if __name__ == "__main__":
 	net = simpleNet()
