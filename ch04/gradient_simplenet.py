@@ -7,9 +7,9 @@ import matplotlib.pyplot as plot
 #from softmax import softmax
 from common.functions import softmax
 from mean_squared_error import cross_entropy_error
-#from numerical_gradient import numerical_gradient
+from numerical_gradient import numerical_gradient
 #from common.functions import softmax, cross_entropy_error
-from common.gradient import numerical_gradient
+#from common.gradient import numerical_gradient
 
 class simpleNet:
 	def __init__(self):

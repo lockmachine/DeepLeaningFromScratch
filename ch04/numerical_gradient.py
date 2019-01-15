@@ -15,18 +15,22 @@ def numerical_gradient(f, x):
 	h = 1e-4	# 0.0001
 	grad = np.zeros_like(x)	# xと同じ形状の配列を生成
 
-	for idx in range(x.size):
+	it = np.nditer(x, flags=["multi_index"], op_flags=["readwrite"])
+#	for idx in range(x.size):
+	while not it.finished:
+		idx = it.multi_index
 		tmp_val = x[idx]
 		# f(x+h) の計算
-		x[idx] = tmp_val + h
+		x[idx] = float(tmp_val) + h
 		fxh1 = f(x)
 
 		# f(x-h) の計算
-		x[idx] = tmp_val - h
+		x[idx] = float(tmp_val) - h
 		fxh2 = f(x)
 
 		grad[idx] = (fxh1 - fxh2) / (2*h)
 		x[idx] = tmp_val
+		it.iternext()
 
 	return grad
 
