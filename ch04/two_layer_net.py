@@ -72,10 +72,11 @@ def main():
 	output_size = 2
 	network = TwoLayerNet(input_size, hidden_size, output_size)
 
-	x = np.array([1,2,3])
-	t = np.array([0,0,1])
+	x = np.array([[1,2,3],[2,3,4],[3,4,5]])
+	t = np.array([[1,0,0],[0,1,0],[0,0,1]])
 	print("numerical_gradient:{}".format(network.numerical_gradient(x, t)))
 	print("loss:{}".format(network.loss(x, t)))
+	print("accuracy:{}".format(network.accuracy(x, t)))
 
 if __name__ == "__main__":
 	main()
