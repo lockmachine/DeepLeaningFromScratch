@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-class MulLayer():
+class MulLayer:
     def __init__(self):
         self.x = None
         self.y = None
@@ -17,7 +17,7 @@ class MulLayer():
         dy = dout * self.x
         return dx, dy
 
-class AddLayer():
+class AddLayer:
     def __init__(self):
         pass
         
