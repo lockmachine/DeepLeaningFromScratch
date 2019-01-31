@@ -12,10 +12,11 @@ from collections import OrderedDict
 class TwoLayerNet:
     def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
         # 重みの初期化
+        self.param = {}
         self.param["W1"] = weight_init_std * np.random.randn(input_size, hidden_size)
-        self.param["W2"] = weithg_init_std * np.random.randn(hidden_size, output_size)
-        self.param["b1"] = np.zeros(hidden_size, 1)
-        self.param["b2"] = np.zeros(output_size, 1)
+        self.param["W2"] = weight_init_std * np.random.randn(hidden_size, output_size)
+        self.param["b1"] = np.zeros(hidden_size)
+        self.param["b2"] = np.zeros(output_size)
         
         # レイヤの生成
         self.layers = OrderedDict()
@@ -26,13 +27,13 @@ class TwoLayerNet:
         self.lastLayer = mySoftmaxWithLoss()
         
     def predict(self, x):
-"""
+        """
         z1 = self.layers["Affine1"].forward(x)
         z2 = self.layers["Relu1"].forward(z1)
         y = self.layers["Affine2"].forward(z2)
         
         return y
-"""
+        """
         for layer in self.layers.values():
             x = layer.forward(x)
         
@@ -57,10 +58,10 @@ class TwoLayerNet:
         loss_W = lambda W: self.loss(x, t)
         
         grads = {}
-        grads["W1"] = numerical_gradient(loss_W, self.params["W1"])
-        grads["b1"] = numerical_gradient(loss_W, self.params["b1"])
-        grads["W2"] = numerical_gradient(loss_W, self.params["W2"])
-        grads["b2"] = numerical_gradient(loss_W, self.params["b2"])
+        grads["W1"] = numerical_gradient(loss_W, self.param["W1"])
+        grads["b1"] = numerical_gradient(loss_W, self.param["b1"])
+        grads["W2"] = numerical_gradient(loss_W, self.param["W2"])
+        grads["b2"] = numerical_gradient(loss_W, self.param["b2"])
         
         return grads
         

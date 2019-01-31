@@ -3,6 +3,7 @@
 import sys, os
 sys.path.append(os.pardir)
 import numpy as np
+from common.functions import *
 
 class myRelu:
     def __init__(self):
@@ -46,7 +47,7 @@ class myAffine:
         
     def forward(self, x):
         # テンソル対応
-        self.original_x_shape = self.shape  # 元々の入力データの形状を記憶
+        self.original_x_shape = x.shape  # 元々の入力データの形状を記憶
         x = x.reshape(x.shape[0], -1)       # 1 次元目の要素数で固定した行列形状にする
         
         self.x = x
