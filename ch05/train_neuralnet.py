@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
+# coding: utf-8
 import sys, os
 sys.path.append(os.pardir)
 import numpy as np
 from dataset.mnist import load_mnist
 from two_layer_net import TwoLayerNet
+import matplotlib.pyplot as plt
 
 # データの読み込み
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
@@ -43,4 +46,6 @@ for i in range(iters_num):
         train_acc_list.append(train_acc)
         test_acc_list.append(test_acc)
         print(train_acc, test_acc)  # 実測値 (0.9792 0.9719)
-        
+    
+plt.plot(train_loss_list)
+plt.show()
