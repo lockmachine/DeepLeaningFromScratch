@@ -57,9 +57,10 @@ for key in optimizers:
     X, Y = np.meshgrid(x, y)
     Z = f(X, Y)
 
+    """
     plt.subplot(2, 2, idx)  # プロットの図の構成を 2x2 とし、idx番目に表示する
     idx += 1
-    
+
     plt.plot(x_history, y_history, "o-", color="red")
     plt.contour(X, Y, Z)
     plt.xlim(-10, 10)
@@ -68,17 +69,30 @@ for key in optimizers:
     plt.title(key)
     plt.xlabel("x")
     plt.ylabel("y")
-
     """
+    
     # figure のインスタンス生成
-    fig = plt.figure()
+#    fig = plt.figure()
+#    plt.subplot(2, 2, idx)
+#    plt.plot(x_history, y_history, 'o-', color="red")
+    plt.contour(X, Y, Z)
     
+    a = x_history
+    b = y_history
+    c = f(np.array(x_history), np.array(y_history))
+    
+#    ax1.scatter3D(x_history, y_history, f(np.array(x_history), np.array(y_history)))
+    
+    
+    ax = plt.axes(projection="3d")
+    ax.plot(a, b, c, "-b")
+    
+
     # Axesのインスタンス生成
-    ax = Axes3D(fig)
-    ax.plot_wireframe(X, Y, Z)
+#    ax1 = Axes3D(fig)
+#    ax1.plot_wireframe(X, Y, Z)
     
-    ax1 = fig.add_subplot(2, 2, idx)
-    ax1.plot(x_history, y_history, f(x_history, y_history))
-    """
+#    ax1.plot(x_history, y_history, f(np.array(x_history), np.array(y_history)))
+    idx += 1
 
 plt.show()
