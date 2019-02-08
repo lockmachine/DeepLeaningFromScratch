@@ -33,6 +33,7 @@ optimizers["Adam"] = Adam(lr=0.3)
 
 idx = 1
 
+fig = plt.figure()
 for key in optimizers:
     optimizer = optimizers[key]
     x_history = []
@@ -50,17 +51,18 @@ for key in optimizers:
         grads["x"], grads["y"] = df(params["x"], params["y"])
         optimizer.update(params, grads)
         
-    x = np.arange(-10, 10, 0.01)
-    y = np.arange(-5, 5, 0.01)
+    x = np.arange(-10, 10, 0.1)
+    y = np.arange(-5, 5, 0.1)
 
     # グリッド作成
     X, Y = np.meshgrid(x, y)
     Z = f(X, Y)
 
-    """
+    
+    """*2次元プロット-------------------------------------------
     plt.subplot(2, 2, idx)  # プロットの図の構成を 2x2 とし、idx番目に表示する
     idx += 1
-
+    
     plt.plot(x_history, y_history, "o-", color="red")
     plt.contour(X, Y, Z)
     plt.xlim(-10, 10)
@@ -69,30 +71,27 @@ for key in optimizers:
     plt.title(key)
     plt.xlabel("x")
     plt.ylabel("y")
+    -------------------------------------------*"""
+    
+    
+    # グラフを複数同時に表示したいとき
+    ax = fig.add_subplot(2, 2, idx, projection="3d")
+    idx += 1
+    
+    # グラフをひとつづつ表示したいとき（ループ前の "fig = plt.figure()" は消す）
+    """
+    # figure メソッドで2次元の図を生成する
+    fig = plt.figure()
+    # 3次元版に変換
+    ax = Axes3D(fig)
     """
     
-    # figure のインスタンス生成
-#    fig = plt.figure()
-#    plt.subplot(2, 2, idx)
-#    plt.plot(x_history, y_history, 'o-', color="red")
-    plt.contour(X, Y, Z)
+    ax.plot_wireframe(X, Y, Z)
     
     a = x_history
     b = y_history
     c = f(np.array(x_history), np.array(y_history))
     
-#    ax1.scatter3D(x_history, y_history, f(np.array(x_history), np.array(y_history)))
+    ax.plot(a, b, c, "r-+")
     
-    
-    ax = plt.axes(projection="3d")
-    ax.plot(a, b, c, "-b")
-    
-
-    # Axesのインスタンス生成
-#    ax1 = Axes3D(fig)
-#    ax1.plot_wireframe(X, Y, Z)
-    
-#    ax1.plot(x_history, y_history, f(np.array(x_history), np.array(y_history)))
-    idx += 1
-
 plt.show()
