@@ -47,7 +47,7 @@ for i in range(10000):
         test_loss_list.append(loss_test)
         
         train_acc = network.accuracy(x_train, t_train)
-        test_acc = network.accuracy(x_test, t_train)
+        test_acc = network.accuracy(x_test, t_test)
         train_acc_list.append(train_acc)
         test_acc_list.append(test_acc)
         
