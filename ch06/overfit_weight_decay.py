@@ -15,8 +15,8 @@ from common.multi_layer_net_extend import MultiLayerNetExtend
 mask_train = np.random.choice(x_train.shape[0], 300)
 x_train = x_train[mask_train]
 t_train = t_train[mask_train]
-
-network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100, 100], output_size=10)
+weight_lambda = 0.1
+network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100, 100], output_size=10, weight_decay_lambda=weight_lambda)
 optimizer = SGD(lr=0.01)
 
 max_epochs = 201
@@ -41,10 +41,10 @@ for i in range(10000):
     optimizer.update(network.params, grads)
     
     if i % iter_per_epoch == 0:
-        loss_train = network.loss(x_train, t_train)
-        loss_test = network.loss(x_test, t_test)
-        train_loss_list.append(loss_train)
-        test_loss_list.append(loss_test)
+        #loss_train = network.loss(x_train, t_train)
+        #loss_test = network.loss(x_test, t_test)
+        #train_loss_list.append(loss_train)
+        #test_loss_list.append(loss_test)
         
         train_acc = network.accuracy(x_train, t_train)
         test_acc = network.accuracy(x_test, t_test)
@@ -53,15 +53,15 @@ for i in range(10000):
         
         epoch_cnt += 1
         print("---{}/{}---".format(epoch_cnt, max_epochs))
-        print("loss_train : " + str(loss_train))
-        print("loss_test  : " + str(loss_test))
+        #print("loss_train : " + str(loss_train))
+        #print("loss_test  : " + str(loss_test))
         print("acc_train  : " + str(train_acc))
         print("acc_test   : " + str(test_acc))
         if epoch_cnt >= max_epochs:
             break
 
-plt.plot(train_loss_list, label="train_loss_list")
-plt.plot(test_loss_list, label="test_loss_list")
+#plt.plot(train_loss_list, label="train_loss_list")
+#plt.plot(test_loss_list, label="test_loss_list")
 plt.plot(train_acc_list, label="train_acc_list")
 plt.plot(test_acc_list, label="test_acc_list")
 plt.legend()
