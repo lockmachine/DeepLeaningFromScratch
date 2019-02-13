@@ -15,11 +15,13 @@ from common.multi_layer_net_extend import MultiLayerNetExtend
 mask_train = np.random.choice(x_train.shape[0], 300)
 x_train = x_train[mask_train]
 t_train = t_train[mask_train]
-weight_lambda = 0.1
-network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100, 100], output_size=10, weight_decay_lambda=weight_lambda)
+weight_lambda = 0
+network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100, 100],
+                            output_size=10, weight_decay_lambda=weight_lambda,
+                            use_dropout = True, dropout_ration = 0.15)
 optimizer = SGD(lr=0.01)
 
-max_epochs = 201
+max_epochs = 301
 train_size = x_train.shape[0]   # 300
 batch_size = 100
 
