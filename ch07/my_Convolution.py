@@ -55,4 +55,12 @@ class myConvolution:
         # backwardの入力を dout.transpose.reshape にする
         dout = dout.transpose(0, 2, 3, 1).reshape(-1, FN)
         
-        db = 
+        """
+        順伝播でのバイアス加算は、それぞれのデータ（1個目のデータ、2個目のデータ、・・・）に対して加算が行われる。
+        そのため、逆伝播の際には、それぞれのデータの逆伝播の値がバイアスの要素に集約される必要がある。
+        """
+        # db = dL/dB = dL/dY = dout で、1x1xFNの形にする
+        self.db = np.sum(dout, axis=0)
+        self.dW = np.dot(self.col.T, dout)
+        
+        
