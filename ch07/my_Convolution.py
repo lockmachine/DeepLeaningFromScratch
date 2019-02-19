@@ -79,6 +79,9 @@ class myPooling:
         self.stride = stride
         self.pad = pad
         
+        self.x = None
+        self.arg_max = None
+        
     def forward(self, x):
         N, C, H, W = x.shape
         self.x = x
@@ -94,12 +97,26 @@ class myPooling:
         # 最大値（２）
         # 各プーリング領域に対して最大値を求める
         # (N x OH x OW x C, 1) のサイズになる
+        arg_max = np.argmax(col, axis=1)
         out = np.max(col, axis=1)
         
         # 整形（３）
         out = out.reshape(N, OH, OW, C).transpose(0, 3, 1, 2)
         
+        self.arg_max = arg_max
+        self.x = x
+        
         return out
         
         def backward(self, dout):
+            dout = dout.transpose(0, 2, 3, 1)
             
+            pool_size = self.pool_h * self.pool_w
+            dmax = np.zeros((dout.size, pool_size))
+            dmax[np.arange(self.arg_max.size), self.arg_max.flatten()] = dout.fllaten()
+            dmax = dmax.reshape(dout.shape + (pool_size,))
+            
+            dcol = dmax.reshape(dmax.shape[0] * dmax.shape[1] * dmax.shape[2], -1)
+            dx = col2im(dcol, self.x.shape, self.pool_h, self.pool_w, self.stride, self.pad)
+            
+            return dx
