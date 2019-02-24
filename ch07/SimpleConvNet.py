@@ -4,6 +4,7 @@ import sys, os
 sys.path.append(os.pardir)
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 from my_Convolution import myConvolution, myPooling
 from common.layers import *
 from collections import OrderedDict
@@ -104,3 +105,22 @@ class SimpleConvNet:
         #print(t)
         #exit()
         return acc
+        
+    def save_params(self, file_name="params.pkl"):
+        params = {}
+        for key, value in self.params.items():
+            params[key] = value
+        with open(file_name, "wb") as f:
+            pickle.dump(params, f)
+            
+    def load_params(self, file_name="params.pkl"):
+        with open(file_name, "rb") as f:
+            params = pickle.load(f)
+        for key, value in params.items():
+            self.params[key] = value
+        
+        # 各層のパラメーターに戻す
+        for key, value in enumerate(["Conv1", "Affine1", "Affine2"]):
+            self.layers[key].W = self.params["W" + str(i+1)]
+            self.layers[key].b = self.params["b" + str(i+1)]
+            

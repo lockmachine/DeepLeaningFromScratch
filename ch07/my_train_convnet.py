@@ -96,6 +96,10 @@ for i in range(train_num):
             break
             
 
+# パラメータの保存
+network.save_params("params.pkl")
+print("Saved Network Parameters!")
+
 # 1110秒かかった
 plt.plot(train_loss_list, label="train_loss")
 plt.plot(train_acc_list, label="train_acc")
