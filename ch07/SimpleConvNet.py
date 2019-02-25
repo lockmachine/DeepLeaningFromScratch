@@ -120,7 +120,7 @@ class SimpleConvNet:
             self.params[key] = value
         
         # 各層のパラメーターに戻す
-        for key, value in enumerate(["Conv1", "Affine1", "Affine2"]):
+        for i, key in enumerate(["Conv1", "Affine1", "Affine2"]):
             self.layers[key].W = self.params["W" + str(i+1)]
             self.layers[key].b = self.params["b" + str(i+1)]
             
